@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2018-04-04T23:16:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_Saidas_Mensais" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b4cb6a3-31b4-4da6-ad6b-0461bfd72235">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Assembleia"/>
+	<queryString>
+		<![CDATA[SELECT assembleia.tbl_saidas.data_saida,
+	assembleia.tbl_saidas.competencia_saida,
+	assembleia.tbl_saidas.descricao_saida,
+	assembleia.tbl_saidas.valor_saida,
+	assembleia.tbl_saidas.numero_recibo,
+	assembleia.tbl_tipo_saidas.descricao_tipo_saida,
+	assembleia.tbl_pessoas.nome,
+	assembleia.tbl_pessoas.cpf,
+	assembleia.tbl_pessoas.cnpj
+FROM assembleia.tbl_saidas
+	INNER JOIN assembleia.tbl_tipo_saidas ON 
+	 assembleia.tbl_saidas.id_tipo_saida = assembleia.tbl_tipo_saidas.id 
+	INNER JOIN assembleia.tbl_pessoas ON 
+	 assembleia.tbl_saidas.id_credor = assembleia.tbl_pessoas.id]]>
+	</queryString>
+	<field name="data_saida" class="java.sql.Date"/>
+	<field name="competencia_saida" class="java.lang.String"/>
+	<field name="descricao_saida" class="java.lang.String"/>
+	<field name="valor_saida" class="java.lang.Double"/>
+	<field name="numero_recibo" class="java.lang.String"/>
+	<field name="descricao_tipo_saida" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="cnpj" class="java.lang.String"/>
+	<variable name="total_reg" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{valor_saida}]]></variableExpression>
+	</variable>
+	<variable name="soma_saidas" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_saida}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<image>
+				<reportElement x="7" y="0" width="113" height="110" uuid="b51d6235-3010-4d1e-8ea8-55aea9a92af6"/>
+				<imageExpression><![CDATA["D:/workspace/org.assembleia/org.assembleia/src/imgs/assembleia_de_deus_agua_boa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="141" y="10" width="561" height="50" uuid="1dcd347e-68f8-4d37-a048-71a22c01906d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Fredericka the Great" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATORIO DE SAIDAS MENSAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="70" width="331" height="20" uuid="310dab1d-a6e6-46fa-a5ff-19ecce18fa6c"/>
+				<text><![CDATA[Assembleia de Deus - São Jose do Xingu-MT - CEP: 78663-000]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="80" height="30" backcolor="#B4EBB0" uuid="34feb055-2687-4085-9238-6a2f387baa11"/>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineWidth="1.0" lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data lanc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="82" y="0" width="70" height="30" backcolor="#B4EBB0" uuid="73397ffe-5576-4529-a5c7-8b4a199200be"/>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compt.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="154" y="0" width="173" height="30" backcolor="#B4EBB0" uuid="233e0e6c-7c74-4177-8917-660467364717">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição do lanc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="329" y="0" width="68" height="30" backcolor="#B4EBB0" uuid="db023161-7091-407e-b84b-ea7c76d988de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="399" y="0" width="58" height="30" backcolor="#B4EBB0" uuid="24424eef-2503-4c5f-af01-8c83873518d2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="0" width="98" height="30" backcolor="#B4EBB0" uuid="b456474e-789e-4e3d-b365-fc9d7f38d7bf">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#0CEDCB"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="559" y="0" width="240" height="30" backcolor="#B4EBB0" uuid="87eed8f3-8867-47ed-9b66-d3a2ecbcee80"/>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#0CEDCB"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credor vinculado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="4" width="80" height="50" uuid="30c0ee6e-4e75-4a36-959a-0def1ad4947e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="4" width="70" height="50" uuid="1522f663-42d3-470c-bea7-32789237b0c9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia_saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="4" width="173" height="50" uuid="66df8dd8-2bba-4208-a25f-25223e33a12a"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao_saida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="329" y="4" width="68" height="50" uuid="d1882422-f203-4c12-9a19-87330b7564de"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="4" width="58" height="50" uuid="fffff688-8d18-4106-9a22-384cbe9a71f4"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_recibo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="4" width="98" height="50" uuid="b033bf31-e694-4f13-840f-4577889c4a7b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao_tipo_saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="559" y="4" width="240" height="50" uuid="ba8fe1fe-2201-4c84-a5d0-bd17b7cdad78"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Batang"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="14" width="50" height="10" uuid="eaa42f53-3658-4a33-bd66-7c6fb2282e16"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Gerado em:]]></text>
+			</staticText>
+			<textField pattern="dd&apos; de &apos;MMMM&apos; de &apos;yyyy">
+				<reportElement x="53" y="14" width="110" height="10" uuid="aba642ac-2100-41e7-ab5f-bebc8f5b2a01"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="85" height="21" uuid="dd771946-8ae0-445a-b7d8-d4f36f18584b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="400" y="0" width="85" height="21" uuid="9bc46d44-6bc0-49b5-aef0-7a15580a46a5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="690" y="15" width="110" height="10" uuid="5abe9a03-eb4b-410b-8a43-97d5374ea025"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Todos os Direitos Reservados]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="121" splitType="Stretch">
+			<rectangle>
+				<reportElement x="132" y="10" width="451" height="111" uuid="46216151-8992-4521-904d-70b16120adbb"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Double" lineColor="#B0BDE8"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="230" y="40" width="162" height="20" uuid="29bbeb0e-99de-45c3-8d05-f823e59fa9ff"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de lançamentos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="61" width="162" height="20" uuid="0227030e-7999-4064-a603-f6df3c14557c"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de saidas:]]></text>
+			</staticText>
+			<textField pattern="#,#00.###;(#,#00.###-)">
+				<reportElement x="392" y="40" width="100" height="20" uuid="6d5f05d3-449e-4b94-84ee-dd872f5c4538"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_reg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="392" y="62" width="100" height="18" uuid="832b71e8-da42-4288-a4a9-dab8f5221d1b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{soma_saidas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

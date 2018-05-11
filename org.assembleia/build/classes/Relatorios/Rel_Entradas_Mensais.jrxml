@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2018-05-01T21:48:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel_Entradas_Mensais" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d8da7b00-ed5c-462b-806d-c61969065d60">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Assembleia"/>
+	<parameter name="competencia" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT assembleia.tbl_entrada.data_entrada,
+	assembleia.tbl_entrada.competencia_entrada,
+	assembleia.tbl_entrada.descricao_entrada,
+	assembleia.tbl_entrada.valor_entrada,
+	assembleia.tbl_tipo_entradas.descricao_tipo_entrada,
+	assembleia.tbl_entrada.id_tipo_entrada
+FROM assembleia.tbl_entrada
+	INNER JOIN assembleia.tbl_tipo_entradas ON 
+	 assembleia.tbl_entrada.id_tipo_entrada = assembleia.tbl_tipo_entradas.id
+	 WHERE assembleia.tbl_entrada.competencia_entrada=$P{competencia}]]>
+	</queryString>
+	<field name="data_entrada" class="java.sql.Date"/>
+	<field name="competencia_entrada" class="java.lang.String"/>
+	<field name="descricao_entrada" class="java.lang.String"/>
+	<field name="valor_entrada" class="java.lang.Double"/>
+	<field name="descricao_tipo_entrada" class="java.lang.String"/>
+	<field name="id_tipo_entrada" class="java.lang.Integer"/>
+	<variable name="total_lancamentos" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{valor_entrada}]]></variableExpression>
+	</variable>
+	<variable name="soma_entradas" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_entrada}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<image>
+				<reportElement x="7" y="0" width="113" height="110" uuid="3f18ba08-ad80-4fcc-b1a0-f42a4b2a544d"/>
+				<imageExpression><![CDATA["D:/workspace/org.assembleia/org.assembleia/src/imgs/assembleia_de_deus_agua_boa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="141" y="10" width="561" height="50" uuid="e647cc1d-257f-42c6-971a-6efddc877cd8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Fredericka the Great" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATORIO DE ENTRADAS MENSAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="70" width="300" height="20" uuid="fae1aa71-ea14-4788-b448-b04b077d8203"/>
+				<text><![CDATA[Assembleia de Deus - São Jose do Xingu-MT - CEP: 78663-000]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="0" width="108" height="30" backcolor="#B4EBB0" uuid="c9592f59-fe6b-4792-ac25-16fde3e6b26a"/>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineWidth="1.0" lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lancto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="0" width="79" height="30" backcolor="#B4EBB0" uuid="ce68d419-eb77-42f6-9a64-9175b2220f47">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Compt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="191" y="0" width="318" height="30" backcolor="#B4EBB0" uuid="e62a730e-b694-4966-9083-0d733eb9ecfc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="510" y="0" width="99" height="30" backcolor="#B4EBB0" uuid="6e96c2e8-34e0-49ea-bd60-f72e34c88990">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entrada R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="610" y="0" width="190" height="30" backcolor="#B4EBB0" uuid="2b55c77c-4032-418b-912d-1d6ebf8453da"/>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineWidth="1.0" lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de entrada]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="2" y="2" width="108" height="58" uuid="0eaab5a2-3098-4f0e-b068-4d11ff03998d"/>
+				<box>
+					<topPen lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="2" width="80" height="58" uuid="af79438f-d34c-4556-bb7e-54a5bed1ef3b"/>
+				<box>
+					<topPen lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="0" width="319" height="60" uuid="0d1c3552-857e-48c0-9c05-e1200fdb0eaa"/>
+				<box>
+					<topPen lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement>
+					<font fontName="Batang" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao_entrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="510" y="0" width="100" height="60" uuid="4eb5e7d3-dbcd-44f0-8c66-82d2a485b4cf"/>
+				<box>
+					<topPen lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="0" width="190" height="60" uuid="61c73aa3-9464-4186-97cd-30e6c5be623a"/>
+				<box>
+					<topPen lineColor="#15BBED"/>
+					<leftPen lineColor="#15BBED"/>
+					<bottomPen lineWidth="1.0" lineColor="#15BBED"/>
+					<rightPen lineColor="#15BBED"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Batang" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao_tipo_entrada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="315" y="13" width="85" height="15" uuid="f0a09444-b67c-416b-9ebd-83601c0210cb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="400" y="13" width="85" height="15" uuid="8c1e3093-06ca-4d45-a676-c47c19f8d82b"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="690" y="16" width="110" height="10" uuid="88caca96-c38c-4c49-a552-fa3ee48d54a6"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Todos os Direitos Reservados]]></text>
+			</staticText>
+			<textField pattern="dd&apos; de &apos;MMMM&apos; de &apos;yyyy">
+				<reportElement x="53" y="18" width="110" height="10" uuid="5485bb39-6350-4975-b5e0-01be7742d0f0"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="18" width="50" height="10" uuid="51d47647-b417-4692-9476-3db0ed4582e8"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Gerado em:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="116">
+			<rectangle>
+				<reportElement x="132" y="5" width="451" height="111" uuid="5b4d1bc4-de99-4cbb-97e1-177ec9c73afa"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Double" lineColor="#B0BDE8"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="238" y="40" width="162" height="20" uuid="bcf2a71d-54e9-4eff-b9ce-f0b860fc0add"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de lançamentos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="61" width="162" height="20" uuid="2982eff0-54bd-4e26-aa8c-4ac6785425bc"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de entradas:]]></text>
+			</staticText>
+			<textField pattern="#,#00.###;(#,#00.###-)">
+				<reportElement x="403" y="40" width="100" height="19" uuid="293414c5-d213-4037-94fc-1aafd9bf1e9b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_lancamentos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="403" y="61" width="100" height="19" uuid="f50da06a-faba-4ffd-b2f6-d62729e57f33"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{soma_entradas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
